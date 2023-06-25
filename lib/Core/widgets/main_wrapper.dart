@@ -18,7 +18,7 @@ class MainWrapper extends StatelessWidget {
     final TeamController c = Get.find();
 
     List<Widget> pageViewWidget = [
-      HomeScreen(),
+      const HomeScreen(),
       ExperienceScreen(),
       const AboutScreen(),
     ];
@@ -38,6 +38,20 @@ class MainWrapper extends StatelessWidget {
               )),
           centerTitle: true,
           backgroundColor: Colors.white,
+          elevation: 1,
+          actions: [
+            IconButton(
+              icon: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: const Icon(Icons.arrow_forward, color: Colors.black)),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
         ),
         body: ListView(
           children: [

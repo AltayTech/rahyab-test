@@ -1,6 +1,8 @@
+import 'dart:io';
+
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../../../../../Core/utils/constants.dart';
 
@@ -11,6 +13,12 @@ class AboutApiProvider {
 
   /// send days list to api
   Future<dynamic> sendDaysList(String selectedDays) async {
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
     _dio.interceptors.add(
       DioLoggingInterceptor(
         level: Level.body,
